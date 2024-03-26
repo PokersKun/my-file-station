@@ -90,7 +90,7 @@ Open a new shell 1:
 
 ### 1) setup esp-hosted
 
-```powershell
+```shell
 root@rpi-4b:~# cd /opt/
 root@rpi-4b:/opt# git clone https://github.com/espressif/esp-hosted.git
 Cloning into 'esp-hosted'...
@@ -565,9 +565,624 @@ All done! You can now run:
 -- Build files have been written to: /opt/esp-hosted/esp_hosted_ng/esp/esp_driver
 ```
 
-### 2) build & flash esp driver
+### 2) git in esp-idf
 
-```powershell
+```shell
+root@rpi-4b:~# cd /opt/esp-hosted/esp_hosted_ng/esp/esp_driver/esp-idf/
+root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/esp/esp_driver/esp-idf# git status
+HEAD detached at d3c99ed3
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+        modified:   components/esp_wifi/lib (modified content, untracked content)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/esp/esp_driver/esp-idf# git diff
+diff --git a/components/esp_wifi/lib b/components/esp_wifi/lib
+--- a/components/esp_wifi/lib
++++ b/components/esp_wifi/lib
+@@ -1 +1 @@
+-Subproject commit 0a89d5ffd2c452407940c2e617434e54f3c34576
++Subproject commit 0a89d5ffd2c452407940c2e617434e54f3c34576-dirty
+root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/esp/esp_driver/esp-idf# git log
+commit d3c99ed3b88eb4c7fb5cf29d6cca1f390ff107e1 (grafted, HEAD)
+Author: Aditya Patwardhan <aditya.patwardhan@espressif.com>
+Date:   Tue Aug 22 14:40:50 2023 +0800
+
+    Merge branch 'update/version_5_1_1' into 'release/v5.1'
+
+    Update version to 5.1.1
+
+    See merge request espressif/esp-idf!25443
+root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/esp/esp_driver/esp-idf# cd components/esp_wifi/lib/
+root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/esp/esp_driver/esp-idf/components/esp_wifi/lib# git status
+HEAD detached at 0a89d5f
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    LICENSE
+        deleted:    README.rst
+        modified:   esp32/libcore.a
+        modified:   esp32/libespnow.a
+        modified:   esp32/libmesh.a
+        modified:   esp32/libnet80211.a
+        modified:   esp32/libpp.a
+        modified:   esp32/libsmartconfig.a
+        modified:   esp32/libwapi.a
+        modified:   esp32c2/libcore.a
+        modified:   esp32c2/libespnow.a
+        modified:   esp32c2/libnet80211.a
+        modified:   esp32c2/libpp.a
+        modified:   esp32c2/libsmartconfig.a
+        modified:   esp32c3/libcore.a
+        modified:   esp32c3/libespnow.a
+        modified:   esp32c3/libmesh.a
+        modified:   esp32c3/libnet80211.a
+        modified:   esp32c3/libpp.a
+        modified:   esp32c3/libsmartconfig.a
+        modified:   esp32c3/libwapi.a
+        modified:   esp32c6/libcore.a
+        modified:   esp32c6/libespnow.a
+        modified:   esp32c6/libmesh.a
+        modified:   esp32c6/libnet80211.a
+        modified:   esp32c6/libpp.a
+        modified:   esp32c6/libsmartconfig.a
+        modified:   esp32c6/libwapi.a
+        modified:   esp32s2/libcore.a
+        modified:   esp32s2/libespnow.a
+        modified:   esp32s2/libmesh.a
+        modified:   esp32s2/libnet80211.a
+        modified:   esp32s2/libpp.a
+        modified:   esp32s2/libsmartconfig.a
+        modified:   esp32s2/libwapi.a
+        modified:   esp32s3/libcore.a
+        modified:   esp32s3/libespnow.a
+        modified:   esp32s3/libmesh.a
+        modified:   esp32s3/libnet80211.a
+        modified:   esp32s3/libpp.a
+        modified:   esp32s3/libsmartconfig.a
+        modified:   esp32s3/libwapi.a
+        deleted:    fix_printf.sh
+        deleted:    tools/ci/build_app.sh
+        deleted:    tools/ci/config/build.yml
+        deleted:    tools/ci/config/feature_test.yml
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        esp_wifi_driver.h
+
+no changes added to commit (use "git add" and/or "git commit -a")
+root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/esp/esp_driver/esp-idf/components/esp_wifi/lib# git diff
+diff --git a/LICENSE b/LICENSE
+deleted file mode 100644
+index d645695..0000000
+--- a/LICENSE
++++ /dev/null
+@@ -1,202 +0,0 @@
+-
+-                                 Apache License
+-                           Version 2.0, January 2004
+-                        http://www.apache.org/licenses/
+-
+-   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+-
+-   1. Definitions.
+-
+-      "License" shall mean the terms and conditions for use, reproduction,
+-      and distribution as defined by Sections 1 through 9 of this document.
+-
+-      "Licensor" shall mean the copyright owner or entity authorized by
+-      the copyright owner that is granting the License.
+-
+-      "Legal Entity" shall mean the union of the acting entity and all
+-      other entities that control, are controlled by, or are under common
+-      control with that entity. For the purposes of this definition,
+-      "control" means (i) the power, direct or indirect, to cause the
+-      direction or management of such entity, whether by contract or
+-      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+-      outstanding shares, or (iii) beneficial ownership of such entity.
+-
+-      "You" (or "Your") shall mean an individual or Legal Entity
+-      exercising permissions granted by this License.
+-
+-      "Source" form shall mean the preferred form for making modifications,
+-      including but not limited to software source code, documentation
+-      source, and configuration files.
+-
+-      "Object" form shall mean any form resulting from mechanical
+-      transformation or translation of a Source form, including but
+-      not limited to compiled object code, generated documentation,
+-      and conversions to other media types.
+-
+-      "Work" shall mean the work of authorship, whether in Source or
+-      Object form, made available under the License, as indicated by a
+-      copyright notice that is included in or attached to the work
+-      (an example is provided in the Appendix below).
+-
+-      "Derivative Works" shall mean any work, whether in Source or Object
+-      form, that is based on (or derived from) the Work and for which the
+-      editorial revisions, annotations, elaborations, or other modifications
+-      represent, as a whole, an original work of authorship. For the purposes
+-      of this License, Derivative Works shall not include works that remain
+-      separable from, or merely link (or bind by name) to the interfaces of,
+-      the Work and Derivative Works thereof.
+-
+-      "Contribution" shall mean any work of authorship, including
+-      the original version of the Work and any modifications or additions
+-      to that Work or Derivative Works thereof, that is intentionally
+-      submitted to Licensor for inclusion in the Work by the copyright owner
+-      or by an individual or Legal Entity authorized to submit on behalf of
+-      the copyright owner. For the purposes of this definition, "submitted"
+-      means any form of electronic, verbal, or written communication sent
+-      to the Licensor or its representatives, including but not limited to
+-      communication on electronic mailing lists, source code control systems,
+-      and issue tracking systems that are managed by, or on behalf of, the
+-      Licensor for the purpose of discussing and improving the Work, but
+-      excluding communication that is conspicuously marked or otherwise
+-      designated in writing by the copyright owner as "Not a Contribution."
+-
+-      "Contributor" shall mean Licensor and any individual or Legal Entity
+-      on behalf of whom a Contribution has been received by Licensor and
+-      subsequently incorporated within the Work.
+-
+-   2. Grant of Copyright License. Subject to the terms and conditions of
+-      this License, each Contributor hereby grants to You a perpetual,
+-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+-      copyright license to reproduce, prepare Derivative Works of,
+-      publicly display, publicly perform, sublicense, and distribute the
+-      Work and such Derivative Works in Source or Object form.
+-
+-   3. Grant of Patent License. Subject to the terms and conditions of
+-      this License, each Contributor hereby grants to You a perpetual,
+-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+-      (except as stated in this section) patent license to make, have made,
+-      use, offer to sell, sell, import, and otherwise transfer the Work,
+-      where such license applies only to those patent claims licensable
+-      by such Contributor that are necessarily infringed by their
+-      Contribution(s) alone or by combination of their Contribution(s)
+-      with the Work to which such Contribution(s) was submitted. If You
+-      institute patent litigation against any entity (including a
+-      cross-claim or counterclaim in a lawsuit) alleging that the Work
+-      or a Contribution incorporated within the Work constitutes direct
+-      or contributory patent infringement, then any patent licenses
+-      granted to You under this License for that Work shall terminate
+-      as of the date such litigation is filed.
+-
+-   4. Redistribution. You may reproduce and distribute copies of the
+-      Work or Derivative Works thereof in any medium, with or without
+-      modifications, and in Source or Object form, provided that You
+-      meet the following conditions:
+-
+-      (a) You must give any other recipients of the Work or
+-          Derivative Works a copy of this License; and
+-
+-      (b) You must cause any modified files to carry prominent notices
+-          stating that You changed the files; and
+-
+-      (c) You must retain, in the Source form of any Derivative Works
+-          that You distribute, all copyright, patent, trademark, and
+-          attribution notices from the Source form of the Work,
+-          excluding those notices that do not pertain to any part of
+-          the Derivative Works; and
+-
+-      (d) If the Work includes a "NOTICE" text file as part of its
+-          distribution, then any Derivative Works that You distribute must
+-          include a readable copy of the attribution notices contained
+-          within such NOTICE file, excluding those notices that do not
+-          pertain to any part of the Derivative Works, in at least one
+-          of the following places: within a NOTICE text file distributed
+-          as part of the Derivative Works; within the Source form or
+-          documentation, if provided along with the Derivative Works; or,
+-          within a display generated by the Derivative Works, if and
+-          wherever such third-party notices normally appear. The contents
+-          of the NOTICE file are for informational purposes only and
+-          do not modify the License. You may add Your own attribution
+-          notices within Derivative Works that You distribute, alongside
+-          or as an addendum to the NOTICE text from the Work, provided
+-          that such additional attribution notices cannot be construed
+-          as modifying the License.
+-
+-      You may add Your own copyright statement to Your modifications and
+-      may provide additional or different license terms and conditions
+-      for use, reproduction, or distribution of Your modifications, or
+-      for any such Derivative Works as a whole, provided Your use,
+-      reproduction, and distribution of the Work otherwise complies with
+-      the conditions stated in this License.
+-
+-   5. Submission of Contributions. Unless You explicitly state otherwise,
+-      any Contribution intentionally submitted for inclusion in the Work
+-      by You to the Licensor shall be under the terms and conditions of
+-      this License, without any additional terms or conditions.
+-      Notwithstanding the above, nothing herein shall supersede or modify
+-      the terms of any separate license agreement you may have executed
+-      with Licensor regarding such Contributions.
+-
+-   6. Trademarks. This License does not grant permission to use the trade
+-      names, trademarks, service marks, or product names of the Licensor,
+-      except as required for reasonable and customary use in describing the
+-      origin of the Work and reproducing the content of the NOTICE file.
+-
+-   7. Disclaimer of Warranty. Unless required by applicable law or
+-      agreed to in writing, Licensor provides the Work (and each
+-      Contributor provides its Contributions) on an "AS IS" BASIS,
+-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+-      implied, including, without limitation, any warranties or conditions
+-      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+-      PARTICULAR PURPOSE. You are solely responsible for determining the
+-      appropriateness of using or redistributing the Work and assume any
+-      risks associated with Your exercise of permissions under this License.
+-
+-   8. Limitation of Liability. In no event and under no legal theory,
+-      whether in tort (including negligence), contract, or otherwise,
+-      unless required by applicable law (such as deliberate and grossly
+-      negligent acts) or agreed to in writing, shall any Contributor be
+-      liable to You for damages, including any direct, indirect, special,
+-      incidental, or consequential damages of any character arising as a
+-      result of this License or out of the use or inability to use the
+-      Work (including but not limited to damages for loss of goodwill,
+-      work stoppage, computer failure or malfunction, or any and all
+-      other commercial damages or losses), even if such Contributor
+-      has been advised of the possibility of such damages.
+-
+-   9. Accepting Warranty or Additional Liability. While redistributing
+-      the Work or Derivative Works thereof, You may choose to offer,
+-      and charge a fee for, acceptance of support, warranty, indemnity,
+-      or other liability obligations and/or rights consistent with this
+-      License. However, in accepting such obligations, You may act only
+-      on Your own behalf and on Your sole responsibility, not on behalf
+-      of any other Contributor, and only if You agree to indemnify,
+-      defend, and hold each Contributor harmless for any liability
+-      incurred by, or claims asserted against, such Contributor by reason
+-      of your accepting any such warranty or additional liability.
+-
+-   END OF TERMS AND CONDITIONS
+-
+-   APPENDIX: How to apply the Apache License to your work.
+-
+-      To apply the Apache License to your work, attach the following
+-      boilerplate notice, with the fields enclosed by brackets "[]"
+-      replaced with your own identifying information. (Don't include
+-      the brackets!)  The text should be enclosed in the appropriate
+-      comment syntax for the file format. We also recommend that a
+-      file or class name and description of purpose be included on the
+-      same "printed page" as the copyright notice for easier
+-      identification within third-party archives.
+-
+-   Copyright [yyyy] [name of copyright owner]
+-
+-   Licensed under the Apache License, Version 2.0 (the "License");
+-   you may not use this file except in compliance with the License.
+-   You may obtain a copy of the License at
+-
+-       http://www.apache.org/licenses/LICENSE-2.0
+-
+-   Unless required by applicable law or agreed to in writing, software
+-   distributed under the License is distributed on an "AS IS" BASIS,
+-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-   See the License for the specific language governing permissions and
+-   limitations under the License.
+diff --git a/README.rst b/README.rst
+deleted file mode 100644
+index 68b0668..0000000
+--- a/README.rst
++++ /dev/null
+@@ -1,10 +0,0 @@
+-ESP32 WiFi Stack Libraries
+-====================
+-
+-This repository contains binary libraries supporting the ESP32 series RF subsystems. It is used as a submodule within `Espressif IoT Development Framework`_ (ESP-IDF).
+-
+-Files in this repository are Copyright (C) 2015-2016 Espressif Systems.
+-
+-These binary libraries are provided under the same license as the parent esp-idf project - the Apache License 2.0 as provided in the file LICENSE. (The license text refers to this as "Object" form.)
+-
+-.. _Espressif IoT Development Framework: https://github.com/espressif/esp-idf
+diff --git a/esp32/libcore.a b/esp32/libcore.a
+index 02a0019..c0603bc 100644
+Binary files a/esp32/libcore.a and b/esp32/libcore.a differ
+diff --git a/esp32/libespnow.a b/esp32/libespnow.a
+index 4bc608b..6925e92 100644
+Binary files a/esp32/libespnow.a and b/esp32/libespnow.a differ
+diff --git a/esp32/libmesh.a b/esp32/libmesh.a
+index 13451f9..8bc3bde 100644
+Binary files a/esp32/libmesh.a and b/esp32/libmesh.a differ
+diff --git a/esp32/libnet80211.a b/esp32/libnet80211.a
+index 052cbdd..8efa73b 100644
+Binary files a/esp32/libnet80211.a and b/esp32/libnet80211.a differ
+diff --git a/esp32/libpp.a b/esp32/libpp.a
+index 2aa0e80..64f8fad 100644
+Binary files a/esp32/libpp.a and b/esp32/libpp.a differ
+diff --git a/esp32/libsmartconfig.a b/esp32/libsmartconfig.a
+index 7cf89c2..0c2341b 100644
+Binary files a/esp32/libsmartconfig.a and b/esp32/libsmartconfig.a differ
+diff --git a/esp32/libwapi.a b/esp32/libwapi.a
+index e6bb9ac..aa69d33 100644
+Binary files a/esp32/libwapi.a and b/esp32/libwapi.a differ
+diff --git a/esp32c2/libcore.a b/esp32c2/libcore.a
+index 7fd8291..bea038d 100644
+Binary files a/esp32c2/libcore.a and b/esp32c2/libcore.a differ
+diff --git a/esp32c2/libespnow.a b/esp32c2/libespnow.a
+index aab8b42..f93bdc4 100644
+Binary files a/esp32c2/libespnow.a and b/esp32c2/libespnow.a differ
+diff --git a/esp32c2/libnet80211.a b/esp32c2/libnet80211.a
+index 6738d3b..1f7a654 100644
+Binary files a/esp32c2/libnet80211.a and b/esp32c2/libnet80211.a differ
+diff --git a/esp32c2/libpp.a b/esp32c2/libpp.a
+index 9cc591b..6251f1c 100644
+Binary files a/esp32c2/libpp.a and b/esp32c2/libpp.a differ
+diff --git a/esp32c2/libsmartconfig.a b/esp32c2/libsmartconfig.a
+index ad493cb..97a1a67 100644
+Binary files a/esp32c2/libsmartconfig.a and b/esp32c2/libsmartconfig.a differ
+diff --git a/esp32c3/libcore.a b/esp32c3/libcore.a
+index 8411fe5..4a0f1dc 100644
+Binary files a/esp32c3/libcore.a and b/esp32c3/libcore.a differ
+diff --git a/esp32c3/libespnow.a b/esp32c3/libespnow.a
+index 10eb6ba..3c8492e 100644
+Binary files a/esp32c3/libespnow.a and b/esp32c3/libespnow.a differ
+diff --git a/esp32c3/libmesh.a b/esp32c3/libmesh.a
+index a2de1c0..4051dc8 100644
+Binary files a/esp32c3/libmesh.a and b/esp32c3/libmesh.a differ
+diff --git a/esp32c3/libnet80211.a b/esp32c3/libnet80211.a
+index c205873..c71a417 100644
+Binary files a/esp32c3/libnet80211.a and b/esp32c3/libnet80211.a differ
+diff --git a/esp32c3/libpp.a b/esp32c3/libpp.a
+index f06459f..8462d76 100644
+Binary files a/esp32c3/libpp.a and b/esp32c3/libpp.a differ
+diff --git a/esp32c3/libsmartconfig.a b/esp32c3/libsmartconfig.a
+index d8e4dde..5f133f9 100644
+Binary files a/esp32c3/libsmartconfig.a and b/esp32c3/libsmartconfig.a differ
+diff --git a/esp32c3/libwapi.a b/esp32c3/libwapi.a
+index 428382e..cf573ac 100644
+Binary files a/esp32c3/libwapi.a and b/esp32c3/libwapi.a differ
+diff --git a/esp32c6/libcore.a b/esp32c6/libcore.a
+index 8411fe5..c3524a6 100644
+Binary files a/esp32c6/libcore.a and b/esp32c6/libcore.a differ
+diff --git a/esp32c6/libespnow.a b/esp32c6/libespnow.a
+index 02a5bee..1250768 100644
+Binary files a/esp32c6/libespnow.a and b/esp32c6/libespnow.a differ
+diff --git a/esp32c6/libmesh.a b/esp32c6/libmesh.a
+index ebc5a5e..322715d 100644
+Binary files a/esp32c6/libmesh.a and b/esp32c6/libmesh.a differ
+diff --git a/esp32c6/libnet80211.a b/esp32c6/libnet80211.a
+index 667828c..6d2a24d 100644
+Binary files a/esp32c6/libnet80211.a and b/esp32c6/libnet80211.a differ
+diff --git a/esp32c6/libpp.a b/esp32c6/libpp.a
+index 9b52537..7ab7ae1 100644
+Binary files a/esp32c6/libpp.a and b/esp32c6/libpp.a differ
+diff --git a/esp32c6/libsmartconfig.a b/esp32c6/libsmartconfig.a
+index 5b0875a..5d80a43 100644
+Binary files a/esp32c6/libsmartconfig.a and b/esp32c6/libsmartconfig.a differ
+diff --git a/esp32c6/libwapi.a b/esp32c6/libwapi.a
+index eb6a501..c7a5c16 100644
+Binary files a/esp32c6/libwapi.a and b/esp32c6/libwapi.a differ
+diff --git a/esp32s2/libcore.a b/esp32s2/libcore.a
+index ba72414..56367bb 100644
+Binary files a/esp32s2/libcore.a and b/esp32s2/libcore.a differ
+diff --git a/esp32s2/libespnow.a b/esp32s2/libespnow.a
+index 6f9530f..a03587f 100644
+Binary files a/esp32s2/libespnow.a and b/esp32s2/libespnow.a differ
+diff --git a/esp32s2/libmesh.a b/esp32s2/libmesh.a
+index 1f92eb3..23ce585 100644
+Binary files a/esp32s2/libmesh.a and b/esp32s2/libmesh.a differ
+diff --git a/esp32s2/libnet80211.a b/esp32s2/libnet80211.a
+index fafd3f6..e606423 100644
+Binary files a/esp32s2/libnet80211.a and b/esp32s2/libnet80211.a differ
+diff --git a/esp32s2/libpp.a b/esp32s2/libpp.a
+index d99c16c..4bfee9f 100644
+Binary files a/esp32s2/libpp.a and b/esp32s2/libpp.a differ
+diff --git a/esp32s2/libsmartconfig.a b/esp32s2/libsmartconfig.a
+index 455c514..a0ca1eb 100644
+Binary files a/esp32s2/libsmartconfig.a and b/esp32s2/libsmartconfig.a differ
+diff --git a/esp32s2/libwapi.a b/esp32s2/libwapi.a
+index 00dbaf8..bdb9ad3 100644
+Binary files a/esp32s2/libwapi.a and b/esp32s2/libwapi.a differ
+diff --git a/esp32s3/libcore.a b/esp32s3/libcore.a
+index d04d899..c6cdcd7 100644
+Binary files a/esp32s3/libcore.a and b/esp32s3/libcore.a differ
+diff --git a/esp32s3/libespnow.a b/esp32s3/libespnow.a
+index 04faa17..69fcbf4 100644
+Binary files a/esp32s3/libespnow.a and b/esp32s3/libespnow.a differ
+diff --git a/esp32s3/libmesh.a b/esp32s3/libmesh.a
+index 70ae3c5..ffd9fdd 100644
+Binary files a/esp32s3/libmesh.a and b/esp32s3/libmesh.a differ
+diff --git a/esp32s3/libnet80211.a b/esp32s3/libnet80211.a
+index e85aa0d..ab03fb8 100644
+Binary files a/esp32s3/libnet80211.a and b/esp32s3/libnet80211.a differ
+diff --git a/esp32s3/libpp.a b/esp32s3/libpp.a
+index 933cf99..a4988fd 100644
+Binary files a/esp32s3/libpp.a and b/esp32s3/libpp.a differ
+diff --git a/esp32s3/libsmartconfig.a b/esp32s3/libsmartconfig.a
+index 476bf9a..c9caee6 100644
+Binary files a/esp32s3/libsmartconfig.a and b/esp32s3/libsmartconfig.a differ
+diff --git a/esp32s3/libwapi.a b/esp32s3/libwapi.a
+index a68a6be..799f0af 100644
+Binary files a/esp32s3/libwapi.a and b/esp32s3/libwapi.a differ
+diff --git a/fix_printf.sh b/fix_printf.sh
+deleted file mode 100755
+index 3df1c47..0000000
+--- a/fix_printf.sh
++++ /dev/null
+@@ -1,69 +0,0 @@
+-#!/bin/bash
+-for dir in esp32 esp32s2 esp32c3 esp32s3 esp32c2 esp32c6; do
+-    if [ $dir = esp32 ]; then
+-        TOOLCHAIN="xtensa-esp32-elf"
+-    elif [ $dir = esp32s2 ]; then
+-        TOOLCHAIN="xtensa-esp32s2-elf"
+-    elif [ $dir = esp32c3 -o $dir = esp32c2 -o $dir = esp32c6 ]; then
+-        TOOLCHAIN="riscv32-esp-elf"
+-    elif [ $dir = esp32s3 ]; then
+-        TOOLCHAIN="xtensa-esp32s3-elf"
+-    else
+-        echo "$dir does not exist"
+-    fi
+-    if [ -d "$dir" ]; then
+-        chmod -x $dir/*;
+-        cd $dir
+-
+-        git status libsmartconfig.a | grep "modified" >/dev/null 2>&1
+-        if [ $? -eq 0 ]; then
+-            echo $dir/libsmartconfig.a fixed
+-            $TOOLCHAIN-objcopy --redefine-sym printf=sc_printf libsmartconfig.a
+-        fi
+-
+-        git status libpp.a | grep "modified" >/dev/null 2>&1
+-        if [ $? -eq 0 ]; then
+-            echo $dir/libpp.a fixed
+-            $TOOLCHAIN-objcopy --redefine-sym printf=pp_printf libpp.a
+-            $TOOLCHAIN-objcopy --redefine-sym ets_printf=pp_printf libpp.a
+-        fi
+-
+-        git status libnet80211.a | grep "modified" >/dev/null 2>&1
+-        if [ $? -eq 0 ]; then
+-            echo $dir/libnet80211.a fixed
+-            $TOOLCHAIN-objcopy --redefine-sym printf=net80211_printf libnet80211.a
+-        fi
+-
+-        git status libmesh.a | grep "modified" >/dev/null 2>&1
+-        if [ $? -eq 0 ]; then
+-            echo $dir/libmesh.a fixed
+-            $TOOLCHAIN-objcopy --redefine-sym printf=mesh_printf libmesh.a
+-            $TOOLCHAIN-objcopy --redefine-sym ets_printf=mesh_printf libmesh.a
+-        fi
+-
+-        git status libcore.a | grep "modified" >/dev/null 2>&1
+-        if [ $? -eq 0 ]; then
+-            echo $dir/libcore.a fixed
+-            $TOOLCHAIN-objcopy --redefine-sym printf=core_printf libcore.a
+-            $TOOLCHAIN-objcopy --redefine-sym ets_printf=core_printf libcore.a
+-        fi
+-
+-        git status libespnow.a | grep "modified" >/dev/null 2>&1
+-        if [ $? -eq 0 ]; then
+-            echo $dir/libespnow.a fixed
+-            $TOOLCHAIN-objcopy --redefine-sym ets_printf=espnow_printf libespnow.a
+-            $TOOLCHAIN-objcopy --redefine-sym printf=espnow_printf libespnow.a
+-        fi
+-
+-        git status libwapi.a | grep "modified" >/dev/null 2>&1
+-        if [ $? -eq 0 ]; then
+-            echo $dir/libwapi.a fixed
+-            $TOOLCHAIN-objcopy --redefine-sym ets_printf=wapi_printf libwapi.a
+-            $TOOLCHAIN-objcopy --redefine-sym printf=wapi_printf libwapi.a
+-        fi
+-
+-        cd ..
+-    else
+-        echo "$dir does not exist"
+-    fi
+-done;
+diff --git a/tools/ci/build_app.sh b/tools/ci/build_app.sh
+deleted file mode 100644
+index 7793f63..0000000
+--- a/tools/ci/build_app.sh
++++ /dev/null
+@@ -1,44 +0,0 @@
+-#!/bin/bash
+-# This file is sourced in to the CI environment
+-# in .gitlab-ci.yml file
+-
+-set -x
+-
+-die() {
+-    echo "${1:-"Unknown Error"}" 1>&2
+-    exit 1
+-}
+-
+-[ -z ${IDF_PATH} ] && die "IDF_PATH is not set."
+-
+-# Set Env
+-cd ${CI_PROJECT_DIR}/esp-idf
+-./install.sh || { echo "Install Failure"; exit 1; }
+-. ./export.sh || { echo "Export Failure"; exit 1; }
+-
+-# Set Env
+-cd ${CI_PROJECT_DIR}/SSC
+-
+-# SSC Dut
+-echo Running cmake for ssc app...
+-if test -f "gen_misc_ng.sh"; then
+-    ./gen_misc_ng.sh SSC
+-fi
+-
+-if test -f "gen_misc_idf.sh"; then
+-    ./gen_misc_idf.sh ESP32 SSC
+-fi
+-
+-# Copying binaries to create build tar ball
+-cd $CI_PROJECT_DIR
+-rm -rf ${board}-${CI_PIPELINE_ID}.debug
+-mkdir -p ${board}-${CI_PIPELINE_ID}.debug/
+-
+-echo Creating ${board}-${VERSION} app binaries debug directory...
+-cp ${CI_PROJECT_DIR}/SSC/build/ssc.bin $board-${CI_PIPELINE_ID}.debug/ || { echo "Copy file Status: Failure"; exit 1; }
+-cp ${CI_PROJECT_DIR}/SSC/build/ssc.elf $board-${CI_PIPELINE_ID}.debug/ || { echo "Copy file Status: Failure"; exit 1; }
+-cp ${CI_PROJECT_DIR}/SSC/build/bootloader/bootloader.bin $board-${CI_PIPELINE_ID}.debug/ || { echo "Copy file Status: Failure"; exit 1; }
+-cp ${CI_PROJECT_DIR}/SSC/build/partition_table/partition-table.bin $board-${CI_PIPELINE_ID}.debug/ || { echo "Copy file Status: Failure"; exit 1; }
+-
+-# Creating tar file (debug)
+-tar -zcvf $board-${CI_PIPELINE_ID}.debug.tar.gz $board-${CI_PIPELINE_ID}.debug || { echo "Create tar Status: Failure"; exit 1; }
+diff --git a/tools/ci/config/build.yml b/tools/ci/config/build.yml
+deleted file mode 100644
+index 746a672..0000000
+--- a/tools/ci/config/build.yml
++++ /dev/null
+@@ -1,33 +0,0 @@
+-build_ssc_esp32:
+-  stage: build
+-  image: $CI_DOCKER_REGISTRY/esp32-ci-env
+-  tags:
+-     - wlan_feature
+-
+-  artifacts:
+-    paths:
+-     - ${board}-${CI_PIPELINE_ID}.debug.tar.gz
+-    expire_in: 1 week
+-
+-  only:
+-    refs:
+-     - triggers
+-
+-  script:
+-    - rm -rf /tmp/esp_wifi_lib
+-    - mkdir /tmp/esp_wifi_lib
+-    - cp -rf * /tmp/esp_wifi_lib
+-    - if git ls-remote ${GITLAB_SSH_SERVER}/idf/esp-idf.git | grep -sw ${CI_BUILD_REF_NAME} 2>&1>/dev/null; then IDF_BRANCH=${CI_BUILD_REF_NAME} ; fi
+-    - if [[ "${BOT_CUSTOMIZED_REVISION}" ]] && [[ "$BOT_CUSTOMIZED_REVISION" == *"esp-idf"* ]]; then IDF_BRANCH=$(python -c 'import os;print eval(os.environ["BOT_CUSTOMIZED_REVISION"])["esp-idf"]') ; fi
+-    - echo Cloning esp-idf - ${IDF_BRANCH} ...
+-    - git clone --recursive --single-branch -b $IDF_BRANCH --dissociate ${GITLAB_SSH_SERVER}/idf/esp-idf.git
+-    - cd esp-idf
+-    - wlan_lib_path=`grep -B 1 esp32-wifi-lib .gitmodules | grep path | cut -d' ' -f3`
+-    - cd $CI_PROJECT_DIR
+-    - rm -rf esp-idf/$wlan_lib_path/*
+-    - cp -rf /tmp/esp_wifi_lib/* esp-idf/$wlan_lib_path/.
+-    - if [[ "${BOT_CUSTOMIZED_REVISION}" ]] && [[ "$BOT_CUSTOMIZED_REVISION" == *"ssc"* ]]; then SSC_BRANCH=$(python -c 'import os;print eval(os.environ["BOT_CUSTOMIZED_REVISION"])["ssc"]') ; fi
+-    - echo Cloning SSC - ${SSC_BRANCH} ...
+-    - git clone --recursive --single-branch -b $SSC_BRANCH --dissociate ${GITLAB_SSH_SERVER}/yinling/SSC.git
+-    - chmod +x tools/ci/build_app.sh
+-    - ./tools/ci/build_app.sh
+diff --git a/tools/ci/config/feature_test.yml b/tools/ci/config/feature_test.yml
+deleted file mode 100644
+index 98b4acb..0000000
+--- a/tools/ci/config/feature_test.yml
++++ /dev/null
+@@ -1,4 +0,0 @@
+-include:
+-  - project: 'espressif/wlan_ci'
+-    ref: master
+-    file: '/ci/templates/wifi_lib_pipeline_tests.yaml'
+root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/esp/esp_driver/esp-idf/components/esp_wifi/lib# git log
+commit 0a89d5ffd2c452407940c2e617434e54f3c34576 (grafted, HEAD)
+Author: Nachiket Kukade <nachiket.kukade@espressif.com>
+Date:   Mon Aug 14 16:48:18 2023 +0530
+
+    fix(wifi): Fix EAPOL Key TxDone callback implementation (ce9244d3)
+```
+
+### 3) build & flash esp driver
+
+```shell
 root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/esp/esp_driver# . ./esp-idf/export.sh
 Setting IDF_PATH to '/opt/esp-hosted/esp_hosted_ng/esp/esp_driver/esp-idf'
 Detecting the Python interpreter
@@ -675,7 +1290,7 @@ Component config  --->Hardware Settings  --->Main XTAL Config  --->Main XTAL fre
 
 `S`>`Enter`>`Enter`>`Q`
 
-```powershell
+```shell
 Executing action: menuconfig
 Running ninja in directory /opt/esp-hosted/esp_hosted_ng/esp/esp_driver/network_adapter/build
 Executing "ninja menuconfig"...
@@ -986,13 +1601,13 @@ I (1895) FW_MAIN: Initial set up done
 I (1895) main_task: Returned from app_main()
 ```
 
-### 3) build & load host driver
+### 4) build & load host driver
 
 Open a new shell 2:
 
 Note: I don't have `/var/log/messages` on my raspbian.
 
-```powershell
+```shell
 root@rpi-4b:~# tail -f /var/log/kern.log
 2024-03-25T17:59:26.754109+08:00 rpi-4b kernel: [   10.006017] bcm2835-codec bcm2835-codec: Device registered as /dev/video18
 2024-03-25T17:59:26.754121+08:00 rpi-4b kernel: [   10.006059] bcm2835-codec bcm2835-codec: Loaded V4L2 image_fx
@@ -1008,7 +1623,7 @@ root@rpi-4b:~# tail -f /var/log/kern.log
 
 Open a new shell 3:
 
-```powershell
+```shell
 root@rpi-4b:~# btmon
 Bluetooth monitor ver 5.66
 = Note: Linux version 6.1.0-rpi7-rpi-v7l (armv7l)                                                                                              0.737943
@@ -1017,7 +1632,7 @@ Bluetooth monitor ver 5.66
 
 Open a new shell 4:
 
-```powershell
+```shell
 root@rpi-4b:~# cd /opt/esp-hosted/esp_hosted_ng/host/
 root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/host# vim spi/esp_spi.c
 root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/host# git diff
@@ -1083,7 +1698,7 @@ ESP32 host init successfully completed
 
 What's new in shell 1:
 
-```powershell
+```shell
 ESP-ROM:esp8684-api2-20220127
 Build:Jan 27 2022
 rst:0x1 (POWERON),boot:0xc (SPI_FAST_FLASH_BOOT)
@@ -1206,7 +1821,7 @@ I (15533) FW_MAIN: Scan request
 
 What's new in shell 2:
 
-```powershell
+```shell
 2024-03-25T18:08:10.632238+08:00 rpi-4b kernel: [  495.761161] NET: Registered PF_ALG protocol family
 2024-03-25T18:08:10.672247+08:00 rpi-4b kernel: [  495.797263] cryptd: max_cpu_qlen set to 1000
 2024-03-25T18:08:10.832219+08:00 rpi-4b kernel: [  495.961332] Bluetooth: Core ver 2.22
@@ -1263,7 +1878,7 @@ What's new in shell 2:
 
 What's new in shell 3:
 
-```powershell
+```shell
 = New Index: 00:00:00:00:00:00 (Primary,SPI,hci0)                                                                                      [hci0] 46.622374
 = Open Index: 00:00:00:00:00:00                                                                                                        [hci0] 46.622476
 < HCI Command: Reset (0x03|0x0003) plen 0                                                                                           #1 [hci0] 46.622547
@@ -2054,11 +2669,11 @@ What's new in shell 3:
         Short name:
 ```
 
-### 4) bluetooth test
+### 5) bluetooth test
 
 Continue in shell 4:
 
-```powershell
+```shell
 root@rpi-4b:/opt/esp-hosted/esp_hosted_ng/host# bluetoothctl
 Agent registered
 [bluetooth]# scan on
@@ -2424,7 +3039,7 @@ Discovery started
 
 What's new in shell 1:
 
-```powershell
+```shell
 Guru Meditation Error: Core  0 panic'ed (Store access fault). Exception was unhandled.
 
 Stack dump detected
@@ -2577,7 +3192,7 @@ I (2159) FW_MAIN: Get MAC command
 
 What's new in shell 2:
 
-```powershell
+```shell
 2024-03-25T18:12:19.192253+08:00 rpi-4b kernel: [  744.327067] Bluetooth: hci0: Opcode 0x2042 failed: -110
 2024-03-25T18:12:19.192327+08:00 rpi-4b kernel: [  744.327084] Bluetooth: hci0: Unable to disable scanning: -110
 2024-03-25T18:12:19.192336+08:00 rpi-4b kernel: [  744.337079] Bluetooth: hci0: command 0x2042 tx timeout
